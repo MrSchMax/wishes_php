@@ -40,7 +40,7 @@ class Response
         );
     }
 
-    public static function sendOk($data): void
+    public static function sendOk(array $data): void
     {
         self::send(
             self::OK_CODE,
@@ -48,7 +48,7 @@ class Response
         );
     }
 
-    public static function sendBadRequestError($data): void
+    public static function sendBadRequestError(array $data): void
     {
         self::send(
             self::BAD_REQ_ERR_CODE,
@@ -56,15 +56,18 @@ class Response
         );
     }
 
-    public static function sendValidationError($data): void
+    public static function sendValidationError(array $errors): void
     {
         self::send(
             self::BAD_REQ_ERR_CODE,
-            $data
+            [
+                'message' => 'Невозможно выполнить запрос. Данные не корректны',
+                'error' => $errors
+            ]
         );
     }
 
-    public static function sendConflictError($data): void
+    public static function sendConflictError(array $data): void
     {
         self::send(
             self::CONFLICT_ERR_CODE,

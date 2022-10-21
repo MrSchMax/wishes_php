@@ -11,10 +11,7 @@ $user = new User($data);
 $validation = $user->validation();
 
 if ($validation->fails()) {
-    Response::sendValidationError([
-        'message' => 'Невозможно выполнить авторизацию. Данные не корректны',
-        'error' => ['validation' => $validation->errors()->toArray()]
-    ]);
+    Response::sendValidationError(['validation' => $validation->errors()->toArray()]);
 }
 else {
     $user->prepare();
