@@ -1,5 +1,10 @@
 {
   "autoload": {
     "psr-4": {"app\\": "src/"}
+  },
+  "require": {
+    "rakit/validation": "^1.4",
+    "ext-pdo": "*",
+    "firebase/php-jwt": "^6.3"
   }
 }
