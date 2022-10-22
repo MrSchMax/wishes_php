@@ -2,8 +2,6 @@
 
 namespace app\models;
 
-use app\AbstractModelWithOwner;
-
 class ListModel extends AbstractModelWithOwner
 {
     public bool $public;

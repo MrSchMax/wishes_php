@@ -2,8 +2,6 @@
 
 namespace app\models;
 
-use app\AbstractModelWithOwner;
-
 class Gift  extends AbstractModelWithOwner
 {
     protected const TABLE = 'gifts';

@@ -2,8 +2,6 @@
 
 namespace app\models;
 
-use app\AbstractModelWithOwner;
-
 class Category extends AbstractModelWithOwner
 {
     protected const TABLE = 'categories';

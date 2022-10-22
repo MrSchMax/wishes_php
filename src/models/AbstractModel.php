@@ -1,7 +1,8 @@
 <?php
 
-namespace app;
+namespace app\models;
 
+use app\Db;
 use app\utils\Arrays;
 use Rakit\Validation\Validation;
 use Rakit\Validation\Validator;
