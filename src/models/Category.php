@@ -2,18 +2,13 @@
 
 namespace app\models;
 
-use app\AbstractModel;
+use app\AbstractModelWithOwner;
 
-class Category extends AbstractModel
+class Category extends AbstractModelWithOwner
 {
     protected const TABLE = 'categories';
     protected const VALIDATORS = [
         'name' => 'required|alpha_spaces|min:2',
         'userId' => 'required|integer',
     ];
-
-    public static function findByUser(string $userId): array
-    {
-        return self::findByValue('userId', $userId);
-    }
 }

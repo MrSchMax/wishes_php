@@ -71,6 +71,7 @@ abstract class AbstractModel
         $columns = array_keys($data);
         $binds = array_map(fn ($key) => ':' . $key, array_keys($data));
 
+
         $sql = 'INSERT INTO ' . static::TABLE . '
         (' . implode(',', $columns) . ')
         VALUES (' . implode(',', $binds) . ' )';
@@ -78,5 +79,43 @@ abstract class AbstractModel
         $db = Db::instance();
         $db->execute($sql, $data);
         $this->id = $db->lastId();
+    }
+
+    public function update(): void
+    {
+        $data = $this->select(array_keys(static::VALIDATORS));
+
+        $columns = implode(
+            ',',
+            array_map(fn ($key) => $key . '=:' . $key, array_keys($data))
+        );
+
+        $sql = 'UPDATE ' . static::TABLE
+            . ' SET ' . $columns
+            . ' WHERE id=:id';
+
+        $data['id'] = $this->id;
+
+        $db = Db::instance();
+        $db->execute($sql, $data);
+    }
+
+    public static function delete($id): void
+    {
+        $sql = 'DELETE FROM ' . static::TABLE
+            . ' WHERE id=:id';
+
+        $db = Db::instance();
+        $db->execute($sql, ['id' => $id]);
+    }
+
+
+    public static function validateId(array $data, string $field = 'id'): Validation
+    {
+        $validator = new Validator();
+        return $validator->validate(
+            $data,
+            [$field => 'required|integer',]
+        );
     }
 }
