@@ -20,10 +20,7 @@ if ($validation->fails()) {
         if ($user) {
             $user->jwt = Auth::generateJwt($user->id);
 
-            Response::sendOk([
-                'message' => 'Успешная авторизация',
-                'data' => $user->select(['password'], false)
-            ]);
+            Response::sendOk($user->select(['password'], false));
         }
         else {
             Response::sendBadRequestError([

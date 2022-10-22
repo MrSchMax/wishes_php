@@ -18,6 +18,17 @@ class Response
         echo json_encode([$data]);
     }
 
+    public static function sendNotFound(): void
+    {
+        self::send(
+            self::NOT_FOUND_ERR_CODE,
+            [
+                'message' => 'Невозможно выполнить запрос',
+                'error' => ["server" => "Запрашиваемый ресурс не найден"]
+            ]
+        );
+    }
+
     public static function sendServerError(): void
     {
         self::send(
@@ -40,11 +51,14 @@ class Response
         );
     }
 
-    public static function sendOk(array $data): void
+    public static function sendOk(object|array $data): void
     {
         self::send(
             self::OK_CODE,
-            $data
+            [
+                'message' => 'Успешно',
+                'data' => $data
+            ]
         );
     }
 

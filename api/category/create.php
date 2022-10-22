@@ -23,16 +23,13 @@ else {
     try {
         $category->insert();
 
-        Response::sendOk([
-            'message' => 'Категория успешно создана',
-            'data' => $category
-        ]);
+        Response::sendOk($category);
 
     } catch (Exception $e) {
         if (($e instanceof PDOException) && $e->getCode() == 23000) {
             Response::sendConflictError([
-                'message' => 'Невозможно создать категорию.',
-                'error' => ['db' => 'Категория с таким именем уже сществует']
+                'message' => 'Недомустимое имя',
+                'error' => ['db' => 'Категория с таким именем уже существует']
             ]);
         }
         else {

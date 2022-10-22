@@ -10,10 +10,7 @@ use app\utils\Response;
 $userId = Auth::getUserId();
 
 try {
-    Response::sendOk([
-        'message' => 'Успешно',
-        'data' => User::findById($userId)->select(['password'], false)
-    ]);
+    Response::sendOk(User::findById($userId)->select(['password'], false));
 } catch (Exception $e) {
     Response::sendServerError();
 }

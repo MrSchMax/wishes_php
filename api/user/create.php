@@ -18,10 +18,7 @@ else {
     try {
         $user->insert();
 
-        Response::sendOk([
-            'message' => 'Пользователь успешно создан',
-            'data' => $user->select(['name', 'email', 'id'])
-        ]);
+        Response::sendOk($user->select(['name', 'email', 'id']));
     }
     catch (Exception $e) {
         if (($e instanceof PDOException) && $e->getCode() == 23000) {
