@@ -81,7 +81,12 @@ class Response
         );
     }
 
-    public static function sendConflictError(array $data): void
+    public const CONFLICT_ERR_MSG = [
+        'message' => 'Операция отклонена',
+        'error' => ['db' => 'Данные с аналогичными параметрами уже существуют']
+    ];
+
+    public static function sendConflictError(array $data = self::CONFLICT_ERR_MSG): void
     {
         self::send(
             self::CONFLICT_ERR_CODE,
