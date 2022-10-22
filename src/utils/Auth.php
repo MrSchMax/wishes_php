@@ -14,7 +14,7 @@ class Auth
         return JWT::encode([
             "iat" => $now,
             "nbf" => $now,
-            "exp" => $now + 3600,
+            "exp" => $now + 360000,
             "jti" => base64_encode(random_bytes(16)),
             "iss" => JWT_ISSUER,
             "aud" => JWT_AUD,
@@ -24,21 +24,29 @@ class Auth
         ], JWT_SECRET, JWT_ALGO);
     }
 
-    public static function getUserId()
-    {
-        $authStr = getallheaders()["Authorization"] ?? '';
+    public static function getUserId() {
+        $id = null;
         try {
+            $authStr = getallheaders()["Authorization"] ?? '';
             if ($authStr && str_starts_with($authStr, 'Bearer ')) {
                 $jwt = substr(getallheaders()["Authorization"], 7);
                 $res = JWT::decode($jwt, new Key(JWT_SECRET, JWT_ALGO));
-                return $res->data->id;
+                $id = $res->data->id ?? null;
             }
-            else {
-                throw new \Exception();
-            }
-        } catch (\Exception $e) {
+        }
+        catch (\Exception $e) {
+        }
+
+        return $id;
+    }
+
+    public static function getUserIdOrStop()
+    {
+        $id = self::getUserId();
+        if (!$id) {
             Response::sendAuthError();
             exit();
         }
+        return $id;
     }
 }

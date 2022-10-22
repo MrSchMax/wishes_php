@@ -7,7 +7,7 @@ use app\models\User;
 use app\utils\Auth;
 use app\utils\Response;
 
-$userId = Auth::getUserId();
+$userId = Auth::getUserIdOrStop();
 
 try {
     Response::sendOk(User::findById($userId)->select(['password'], false));

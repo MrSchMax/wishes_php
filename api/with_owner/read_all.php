@@ -8,7 +8,7 @@ use app\utils\Auth;
 use app\utils\Response;
 
 if (isset($class)) {
-    $userId = Auth::getUserId();
+    $userId = Auth::getUserIdOrStop();
     try {
         Response::sendOk($class::findByOwner($userId));
     } catch (Exception $e) {

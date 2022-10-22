@@ -7,7 +7,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 use app\utils\Auth;
 use app\utils\Response;
 
-$userId = Auth::getUserId();
+$userId = Auth::getUserIdOrStop();
 
 $data = json_decode(file_get_contents("php://input"), true);
 $data['userId'] = $userId;

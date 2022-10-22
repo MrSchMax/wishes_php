@@ -9,7 +9,7 @@ use app\utils\Auth;
 use app\utils\Response;
 if (isset($class)) {
 
-    $userId = Auth::getUserId();
+    $userId = Auth::getUserIdOrStop();
 
     $data = json_decode(file_get_contents("php://input"), true);
 
