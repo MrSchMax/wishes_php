@@ -12,7 +12,7 @@ class Category extends AbstractModel
     protected const TABLE = 'categories';
     protected const OWNER_KEY = 'userId';
     protected const VALIDATORS = [
-        'name' => 'required|alpha_spaces|min:2',
+        'name' => 'required|min:2|max:100|regex:/^[-\p{L} _\d]+$/u',
         'userId' => 'required|integer',
     ];
 }

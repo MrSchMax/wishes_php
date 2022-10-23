@@ -15,7 +15,7 @@ class ListModel extends AbstractModel
     protected const TABLE = 'lists';
     protected const OWNER_KEY = 'userId';
     protected const VALIDATORS = [
-        'name' => 'required|alpha_spaces|min:2',
+        'name' => 'required|min:2|max:100|regex:/^[-\p{L} _\d]+$/u',
         'public' => 'default:false|boolean',
         'userId' => 'required|integer',
     ];
