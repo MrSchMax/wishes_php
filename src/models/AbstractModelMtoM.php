@@ -4,7 +4,7 @@ namespace app\models;
 
 use app\Db;
 
-class AbstractModelMtoM extends AbstractModelWithOwner
+abstract class AbstractModelMtoM extends AbstractModelWithOwner
 {
 
     protected const LINKED_TABLE = '';
