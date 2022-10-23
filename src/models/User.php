@@ -8,7 +8,6 @@ class User extends AbstractModel
 {
     protected const TABLE = 'users';
     protected const VALIDATORS = [
-        'name' => 'required|alpha_spaces|min:2',
         'email' => 'required|email',
         'password' => 'required|min:8',
     ];
