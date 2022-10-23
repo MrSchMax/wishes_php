@@ -15,7 +15,7 @@ class Response
     public static function send($code, $data): void
     {
         http_response_code($code);
-        echo json_encode([$data]);
+        echo json_encode($data);
     }
 
     public static function sendNotFound(): void
