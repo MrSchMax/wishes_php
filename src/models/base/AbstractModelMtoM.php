@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace app\models\base;
 
 use app\Db;
 
@@ -33,23 +33,5 @@ abstract class AbstractModelMtoM extends AbstractModel
             ' INNER JOIN ' . static::LINKED_TABLE . ' ON ' . static::LINKED_TABLE_KEY . '=id' .
             ' WHERE ' . $key . '=:' .$key;
         return $db->query($sql, static::class, [$key => $value]);
-    }
-
-    public function remove(): void
-    {
-        $columns = implode(
-            ' AND ',
-            array_map(
-                fn ($key) => $key . '=:' . $key,
-                [static::LINKED_TABLE_KEY, static::OWNER_KEY]
-            )
-        );
-
-        $sql =
-            'DELETE FROM ' . static::TABLE .
-            ' WHERE ' . $columns;
-
-        $db = Db::instance();
-        $db->execute($sql, $this->select(array_keys(static::VALIDATORS)));
     }
 }

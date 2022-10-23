@@ -2,6 +2,9 @@
 
 namespace app\models;
 
+use app\models\base\AbstractModel;
+use app\models\base\TraitModelWithOwner;
+
 class Category extends AbstractModel
 {
     use TraitModelWithOwner;

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace app\models\base;
 
 use app\Db;
 use app\utils\Arrays;

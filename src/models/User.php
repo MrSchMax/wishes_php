@@ -2,6 +2,8 @@
 
 namespace app\models;
 
+use app\models\base\AbstractModel;
+
 class User extends AbstractModel
 {
     protected const TABLE = 'users';

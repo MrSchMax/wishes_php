@@ -2,6 +2,10 @@
 
 namespace app\models;
 
+use app\models\base\AbstractModel;
+use app\models\base\TraitModelWithArrays;
+use app\models\base\TraitModelWithOwner;
+
 class ListModel extends AbstractModel
 {
     use TraitModelWithArrays;

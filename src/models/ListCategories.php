@@ -2,6 +2,8 @@
 
 namespace app\models;
 
+use app\models\base\AbstractModelMtoM;
+
 class ListCategories extends AbstractModelMtoM
 {
     protected const TABLE = 'list_categories';

@@ -1,5 +1,5 @@
 <?php
-namespace app\models;
+namespace app\models\base;
 
 // ожидает наличие в классе такого массива:
 //    protected const ARRAYS = [
