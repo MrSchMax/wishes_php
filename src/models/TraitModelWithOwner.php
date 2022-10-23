@@ -1,10 +1,10 @@
 <?php
-
 namespace app\models;
 
-abstract class AbstractModelWithOwner extends AbstractModel
+// Требует наличие константы OWNER_KEY
+
+trait TraitModelWithOwner
 {
-    protected const OWNER_KEY = 'userId';
 
     public static function findByOwner($owner): array
     {
@@ -19,9 +19,4 @@ abstract class AbstractModelWithOwner extends AbstractModel
             : null
             ;
     }
-
 }
-
-// 1. get list by id
-// 2. if user not owner -> end
-//

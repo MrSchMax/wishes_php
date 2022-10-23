@@ -4,8 +4,9 @@ namespace app\models;
 
 use app\Db;
 
-abstract class AbstractModelMtoM extends AbstractModelWithOwner
+abstract class AbstractModelMtoM extends AbstractModel
 {
+    use TraitModelWithOwner;
 
     protected const LINKED_TABLE = '';
     protected const LINKED_TABLE_KEY = '';

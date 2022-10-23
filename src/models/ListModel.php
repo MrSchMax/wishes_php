@@ -2,12 +2,14 @@
 
 namespace app\models;
 
-class ListModel extends AbstractModelWithOwner
+class ListModel extends AbstractModel
 {
     use TraitModelWithArrays;
+    use TraitModelWithOwner;
     public bool $public;
 
     protected const TABLE = 'lists';
+    protected const OWNER_KEY = 'userId';
     protected const VALIDATORS = [
         'name' => 'required|alpha_spaces|min:2',
         'public' => 'default:false|boolean',
