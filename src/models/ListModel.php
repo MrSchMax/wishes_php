@@ -4,6 +4,7 @@ namespace app\models;
 
 class ListModel extends AbstractModelWithOwner
 {
+    use TraitModelWithArrays;
     public bool $public;
 
     protected const TABLE = 'lists';
@@ -13,8 +14,23 @@ class ListModel extends AbstractModelWithOwner
         'userId' => 'required|integer',
     ];
 
+    protected const ARRAYS = [
+        [
+            'baseModel' => Category::class,
+            'mtomModel' => ListCategories::class,
+            'fieldName' => 'categories'
+        ],
+        [
+            'baseModel' => Gift::class,
+            'mtomModel' =>  ListGifts::class,
+            'fieldName' => 'gifts'
+        ]
+    ];
+
     public function hasAccess($userId): bool
     {
         return $this->public || $this->userId ==  $userId;
     }
+
+
 }
