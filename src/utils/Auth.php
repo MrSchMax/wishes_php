@@ -14,7 +14,7 @@ class Auth
         return JWT::encode([
             "iat" => $now,
             "nbf" => $now,
-            "exp" => $now + 360000,
+            "exp" => $now + 3600,
             "jti" => base64_encode(random_bytes(16)),
             "iss" => JWT_ISSUER,
             "aud" => JWT_AUD,
@@ -42,7 +42,7 @@ class Auth
 
     public static function getUserIdOrStop()
     {
-        $id = self::getUserId();
+        $id = static::getUserId();
         if (!$id) {
             Response::sendAuthError();
             exit();

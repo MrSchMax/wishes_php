@@ -10,6 +10,7 @@ use Rakit\Validation\Validator;
 abstract class AbstractModel
 {
     protected const TABLE = '';
+    protected const MAIN_ID = 'id';
     protected const VALIDATORS =[];
     protected const VALIDATION_MSGS = [];
 
@@ -33,10 +34,10 @@ abstract class AbstractModel
 
     public static function findById($id): ?object
     {
-        return self::findFirstByValue('id', $id);
+        return static::findFirstByValue(static::MAIN_ID, $id);
     }
 
-    public static function findByValue($key, $value): ?array
+    public static function findByValue($key, $value): array
     {
         $db=Db::instance();
         $sql= 'SELECT * FROM ' . static::TABLE . ' WHERE ' . $key . '=:' .$key;
@@ -45,7 +46,7 @@ abstract class AbstractModel
 
     public static function findFirstByValue($key, $value): ?object
     {
-        return self::getFirst(self::findByValue($key, $value));
+        return static::getFirst(static::findByValue($key, $value));
     }
 
     public function validation(?array $keys = null, bool $isInclude = true): Validation
@@ -82,7 +83,7 @@ abstract class AbstractModel
         $this->id = $db->lastId();
     }
 
-    public function update(): void
+    public function update(): ?object
     {
         $data = $this->select(array_keys(static::VALIDATORS));
 
@@ -95,19 +96,21 @@ abstract class AbstractModel
             . ' SET ' . $columns
             . ' WHERE id=:id';
 
-        $data['id'] = $this->id;
+        $data[static::MAIN_ID] = $this->id;
 
         $db = Db::instance();
         $db->execute($sql, $data);
+
+        return static::findById($this->id);
     }
 
     public static function delete($id): void
     {
         $sql = 'DELETE FROM ' . static::TABLE
-            . ' WHERE id=:id';
+            . ' WHERE '. static::MAIN_ID . '=:' . static::MAIN_ID;
 
         $db = Db::instance();
-        $db->execute($sql, ['id' => $id]);
+        $db->execute($sql, [static::MAIN_ID => $id]);
     }
 
 

@@ -19,12 +19,12 @@ class User extends AbstractModel
 
     public static function findByEmail(string $email): ?object
     {
-        return self::findFirstByValue('email', $email);
+        return static::findFirstByValue('email', $email);
     }
 
     public function getVerified(): ?object
     {
-        $user = self::findByEmail($this->email);
+        $user = static::findByEmail($this->email);
         return $user && password_verify($this->password, $user->password)
             ? $user
             : null
