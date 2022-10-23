@@ -27,8 +27,8 @@ if ($validationId->fails() || $validationData->fails()) {
 } else {
     try {
         if ($class::getCurrentForOwner($item->id, $userId)) {
-            $item->update();
-            Response::sendOk($item);
+            $result = $item->update();
+            Response::sendOk($result);
         } else {
             Response::sendNotFound();
         }
