@@ -66,9 +66,22 @@ abstract class AbstractModel
         return Arrays::select(get_object_vars($this), $keys, $isInclude);
     }
 
-    public function insert(): void
+    protected function prepareData(): array
     {
         $data = $this->select(array_keys(static::VALIDATORS));
+
+        foreach ($data as $key => $value) {
+            if (gettype($value) == 'boolean') {
+                $data[$key] = $value ? 1 : 0;
+            }
+        }
+
+        return $data;
+    }
+
+    public function insert(): void
+    {
+        $data = $this->prepareData();
 
         $columns = array_keys($data);
         $binds = array_map(fn ($key) => ':' . $key, array_keys($data));
@@ -85,7 +98,7 @@ abstract class AbstractModel
 
     public function update(): ?object
     {
-        $data = $this->select(array_keys(static::VALIDATORS));
+        $data = $this->prepareData();
 
         $columns = implode(
             ',',

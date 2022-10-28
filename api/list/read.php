@@ -8,6 +8,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 use app\models\ListModel;
 use app\utils\Auth;
 use app\utils\Response;
+use app\utils\Cors;
+Cors::cors();
 
 
 $data = json_decode(file_get_contents("php://input"), true);

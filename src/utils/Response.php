@@ -23,8 +23,8 @@ class Response
         self::send(
             self::NOT_FOUND_ERR_CODE,
             [
-                'message' => 'Невозможно выполнить запрос',
-                'error' => ["server" => "Запрашиваемый ресурс не найден"]
+                'message' => 'Запрашиваемый ресурс не найден',
+                'error' => ['server' => 'Невозможно выполнить запрос']
             ]
         );
     }
@@ -34,8 +34,8 @@ class Response
         self::send(
             self::SERVER_ERR_CODE,
             [
-                'message' => 'Невозможно выполнить запрос',
-                'error' => ["server" => "Внуренняя ошибка сервера"]
+                'message' => 'Внуренняя ошибка сервера',
+                'error' => ['server' => 'Невозможно выполнить запрос']
             ]
         );
     }
@@ -82,8 +82,8 @@ class Response
     }
 
     public const CONFLICT_ERR_MSG = [
-        'message' => 'Операция отклонена',
-        'error' => ['db' => 'Данные с аналогичными параметрами уже существуют']
+        'message' => 'Данные с аналогичными параметрами уже существуют',
+        'error' => ['db' => 'Операция отклонена']
     ];
 
     public static function sendConflictError(array $data = self::CONFLICT_ERR_MSG): void

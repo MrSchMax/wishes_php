@@ -7,6 +7,9 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
 use app\utils\Auth;
 use app\utils\Response;
+use app\utils\Cors;
+Cors::cors();
+
 if (isset($class)) {
 
     $userId = Auth::getUserIdOrStop();
