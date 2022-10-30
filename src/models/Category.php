@@ -9,6 +9,8 @@ class Category extends AbstractModel
 {
     use TraitModelWithOwner;
 
+    public int $id; 
+
     protected const TABLE = 'categories';
     protected const OWNER_KEY = 'userId';
     protected const VALIDATORS = [

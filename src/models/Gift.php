@@ -9,6 +9,8 @@ class Gift  extends AbstractModel
 {
     use TraitModelWithOwner;
 
+    public int $id;
+
     protected const TABLE = 'gifts';
     protected const OWNER_KEY = 'userId';
     protected const VALIDATORS = [

@@ -11,6 +11,7 @@ class ListModel extends AbstractModel
     use TraitModelWithArrays;
     use TraitModelWithOwner;
     public bool $public;
+    public int $id;
 
     protected const TABLE = 'lists';
     protected const OWNER_KEY = 'userId';
